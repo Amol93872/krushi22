@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KrushiBharat - Market Linkages</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root {
+        --primary-color: #2ecc71;
+        --secondary-color: #27ae60;
+        --text-color: #2c3e50;
+        --background-color: #f9f9f9;
+        --card-background: #ffffff;
+        --border-color: #e0e0e0;
+        --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        --border-radius: 8px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+      }
+
+      .header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .main-content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .crop-listing-section {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+
+      .listing-form {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      label {
+        font-weight: 500;
+      }
+
+      select,
+      input {
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .price-estimate {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .price-range {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: var(--border-radius);
+      }
+
+      .demand-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .listings-preview {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+
+      .listings-container {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .listing-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+      }
+
+      .listing-card img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+      }
+
+      .market-insights {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+      }
+
+      .market-chart {
+        margin: 2rem 0;
+        height: 300px;
+      }
+
+      .govt-updates ul {
+        list-style: none;
+        margin-top: 1rem;
+      }
+
+      .govt-updates li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .govt-updates li:last-child {
+        border-bottom: none;
+      }
+
+      .demand-high {
+        color: #2ecc71;
+      }
+
+      .demand-medium {
+        color: #f39c12;
+      }
+
+      .demand-low {
+        color: #e74c3c;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .listing-form {
+          grid-template-columns: 1fr;
+        }
+
+        .listing-card {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .listing-card img {
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg sticky-top"
+      style="background-color: #8cd12b"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand text-light" href="index.html"
+          >Krishi<span>Bharat</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="Knowledge Hub.html"
+                >Knowledge Hub</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="emarket.html">Marketplace</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="marketlinks.html"
+                >Market Links</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="smartfarming.html"
+                >Smart Farming</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="govermentschemes.html"
+                >Schemes</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="app">
+      <header class="header">
+        <h1>🌾 KrushiBharat - Market Linkages</h1>
+        <p class="subtitle">Connect Farmers with Markets</p>
+      </header>
+
+      <main class="main-content">
+        <section class="crop-listing-section">
+          <h2>List Your Crops</h2>
+          <form id="cropListingForm" class="listing-form">
+            <div class="form-group">
+              <label for="cropType">Select Crop</label>
+              <select id="cropType" required>
+                <option value="">Choose crop type...</option>
+                <option value="wheat">Wheat</option>
+                <option value="rice">Rice</option>
+                <option value="maize">Maize</option>
+                <option value="potato">Potato</option>
+                <option value="tomato">Tomato</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity (in kg)</label>
+              <input type="number" id="quantity" min="1" required />
+            </div>
+
+            <div class="form-group">
+              <label for="location">State/City</label>
+              <select id="location" required>
+                <option value="">Select location...</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="punjab">Punjab</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="gujarat">Gujarat</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-primary">List Crop</button>
+          </form>
+
+          <div class="price-estimate">
+            <h3>Estimated Price Range</h3>
+            <div id="priceRange" class="price-range">
+              Select a crop and location to see price estimates
+            </div>
+            <div id="demandIndicator" class="demand-indicator"></div>
+          </div>
+        </section>
+
+        <section class="listings-preview">
+          <h2>Your Listed Crops</h2>
+          <div id="listingsContainer" class="listings-container"></div>
+        </section>
+
+        <section class="market-insights">
+          <h2>Market Insights</h2>
+          <canvas id="marketTrendsChart"></canvas>
+          <div class="govt-updates">
+            <h3>Government Updates</h3>
+            <ul>
+              <li>🏷️ MSP for Wheat increased to ₹2,125 per quintal</li>
+              <li>📢 New procurement scheme launched for pulses</li>
+              <li>💰 Direct benefit transfer for registered farmers</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      // Mock data for crop prices and demand
+      const cropData = {
+        wheat: {
+          maharashtra: { min: 2000, max: 2200, demand: "high" },
+          punjab: { min: 2100, max: 2300, demand: "high" },
+          karnataka: { min: 1900, max: 2100, demand: "medium" },
+          gujarat: { min: 2050, max: 2250, demand: "medium" },
+        },
+        rice: {
+          maharashtra: { min: 1800, max: 2000, demand: "medium" },
+          punjab: { min: 1900, max: 2100, demand: "high" },
+          karnataka: { min: 1850, max: 2050, demand: "medium" },
+          gujarat: { min: 1750, max: 1950, demand: "low" },
+        },
+        maize: {
+          maharashtra: { min: 1600, max: 1800, demand: "medium" },
+          punjab: { min: 1650, max: 1850, demand: "medium" },
+          karnataka: { min: 1700, max: 1900, demand: "high" },
+          gujarat: { min: 1550, max: 1750, demand: "low" },
+        },
+        potato: {
+          maharashtra: { min: 1200, max: 1400, demand: "medium" },
+          punjab: { min: 1250, max: 1450, demand: "medium" },
+          karnataka: { min: 1300, max: 1500, demand: "low" },
+          gujarat: { min: 1150, max: 1350, demand: "high" },
+        },
+        tomato: {
+          maharashtra: { min: 2500, max: 3000, demand: "high" },
+          punjab: { min: 2400, max: 2900, demand: "medium" },
+          karnataka: { min: 2600, max: 3100, demand: "high" },
+          gujarat: { min: 2300, max: 2800, demand: "medium" },
+        },
+      };
+
+      // Crop images (using placeholder images)
+      const cropImages = {
+        wheat: "https://placehold.co/60x60?text=Wheat",
+        rice: "https://placehold.co/60x60?text=Rice",
+        maize: "https://placehold.co/60x60?text=Maize",
+        potato: "https://placehold.co/60x60?text=Potato",
+        tomato: "https://placehold.co/60x60?text=Tomato",
+      };
+
+      // Initialize form elements
+      const form = document.getElementById("cropListingForm");
+      const cropType = document.getElementById("cropType");
+      const locationSelect = document.getElementById("location");
+      const quantity = document.getElementById("quantity");
+      const priceRange = document.getElementById("priceRange");
+      const demandIndicator = document.getElementById("demandIndicator");
+      const listingsContainer = document.getElementById("listingsContainer");
+
+      // Update price range and demand indicator
+      function updatePriceEstimate() {
+        const selectedCrop = cropType.value;
+        const selectedLocation = locationSelect.value;
+
+        if (selectedCrop && selectedLocation) {
+          const data = cropData[selectedCrop][selectedLocation];
+          priceRange.innerHTML = `
+            <strong>Price Range:</strong> ₹${data.min} - ₹${data.max} per quintal
+        `;
+
+          const demandClass = `demand-${data.demand}`;
+          const demandEmoji = {
+            high: "🟢",
+            medium: "🟠",
+            low: "🔴",
+          }[data.demand];
+
+          demandIndicator.innerHTML = `
+            <span class="${demandClass}">
+                ${demandEmoji} ${data.demand.toUpperCase()} Demand
+            </span>
+        `;
+        }
+      }
+
+      // Handle form submission
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const selectedCrop = cropType.value;
+        const selectedLocation = locationSelect.value;
+        const quantityValue = quantity.value;
+        const data = cropData[selectedCrop][selectedLocation];
+
+        const listingCard = document.createElement("div");
+        listingCard.className = "listing-card";
+        listingCard.innerHTML = `
+        <img src="${cropImages[selectedCrop]}" alt="${selectedCrop}">
+        <div class="listing-details">
+            <h3>${
+              selectedCrop.charAt(0).toUpperCase() + selectedCrop.slice(1)
+            }</h3>
+            <p>Quantity: ${quantityValue} kg</p>
+            <p>Location: ${
+              selectedLocation.charAt(0).toUpperCase() +
+              selectedLocation.slice(1)
+            }</p>
+            <p>Estimated Price: ₹${data.min} - ₹${data.max} per quintal</p>
+        </div>
+        <span class="demand-${data.demand}">
+            ${data.demand.toUpperCase()} Demand
+        </span>
+    `;
+
+        listingsContainer.insertBefore(
+          listingCard,
+          listingsContainer.firstChild
+        );
+        form.reset();
+        priceRange.innerHTML =
+          "Select a crop and location to see price estimates";
+        demandIndicator.innerHTML = "";
+      });
+
+      // Add event listeners for price updates
+      cropType.addEventListener("change", updatePriceEstimate);
+      locationSelect.addEventListener("change", updatePriceEstimate);
+
+      // Simple market trends visualization using canvas
+      const ctx = document.getElementById("marketTrendsChart").getContext("2d");
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+      const wheatPrices = [2000, 2100, 2150, 2200, 2180, 2250];
+      const ricePrices = [1800, 1850, 1900, 1950, 2000, 1980];
+
+      // Chart configuration
+      function drawChart() {
+        const width = ctx.canvas.width;
+        const height = ctx.canvas.height;
+        const padding = 40;
+        const chartWidth = width - 2 * padding;
+        const chartHeight = height - 2 * padding;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw axes
+        ctx.beginPath();
+        ctx.moveTo(padding, padding);
+        ctx.lineTo(padding, height - padding);
+        ctx.lineTo(width - padding, height - padding);
+        ctx.stroke();
+
+        // Draw wheat prices line
+        ctx.beginPath();
+        ctx.strokeStyle = "#2ecc71";
+        wheatPrices.forEach((price, i) => {
+          const x = padding + (i * chartWidth) / (wheatPrices.length - 1);
+          const y = height - padding - ((price - 1800) / 500) * chartHeight;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Draw rice prices line
+        ctx.beginPath();
+        ctx.strokeStyle = "#3498db";
+        ricePrices.forEach((price, i) => {
+          const x = padding + (i * chartWidth) / (ricePrices.length - 1);
+          const y = height - padding - ((price - 1800) / 500) * chartHeight;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Draw labels
+        ctx.fillStyle = "#2c3e50";
+        ctx.font = "12px Arial";
+        months.forEach((month, i) => {
+          const x = padding + (i * chartWidth) / (months.length - 1);
+          ctx.fillText(month, x - 10, height - padding + 20);
+        });
+
+        // Draw legend
+        ctx.fillStyle = "#2ecc71";
+        ctx.fillRect(width - 100, 20, 15, 15);
+        ctx.fillStyle = "#3498db";
+        ctx.fillRect(width - 100, 40, 15, 15);
+        ctx.fillStyle = "#2c3e50";
+        ctx.fillText("Wheat", width - 80, 32);
+        ctx.fillText("Rice", width - 80, 52);
+      }
+
+      // Initial draw and resize handling
+      drawChart();
+      window.addEventListener("resize", drawChart);
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KrushiBharat - Farmer's Marketplace</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root {
+        --primary-color: #2ecc71;
+        --secondary-color: #27ae60;
+        --text-color: #333;
+        --light-gray: #f5f5f5;
+        --border-color: #ddd;
+        --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-gray);
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        background-color: white;
+        padding: 1rem 2rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo h1 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+      }
+
+      .logo .tagline {
+        font-size: 0.9rem;
+        color: var(--text-color);
+      }
+
+      .nav-items {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+      }
+
+      .search-bar input {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        width: 300px;
+      }
+
+      .search-bar button {
+        padding: 0.5rem 1rem;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 0 4px 4px 0;
+        color: white;
+        cursor: pointer;
+      }
+
+      .cart-icon {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      /* Filters Section */
+      .filters {
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        margin: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background: var(--light-gray);
+      }
+
+      .filter-btn.active {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      #sortSelect {
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+      }
+
+      /* Products Grid */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-info {
+        padding: 1rem;
+      }
+
+      .product-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-price {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .add-to-cart {
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .add-to-cart:hover {
+        background: var(--secondary-color);
+      }
+
+      /* Cart Modal */
+      .cart-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 400px;
+        background: white;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .cart-modal.active {
+        display: block;
+      }
+
+      .cart-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .cart-header {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .close-cart {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .cart-items {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 1rem;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .cart-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .cart-item-info {
+        flex-grow: 1;
+      }
+
+      .cart-item-title {
+        font-weight: bold;
+      }
+
+      .cart-item-price {
+        color: var(--primary-color);
+      }
+
+      .remove-item {
+        color: red;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .cart-footer {
+        padding: 1rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .nav-items {
+          width: 100%;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .search-bar {
+          width: 100%;
+        }
+
+        .search-bar input {
+          width: 100%;
+        }
+
+        .filters {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .cart-modal {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg sticky-top"
+      style="background-color: #8cd12b"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand text-light" href="index.html"
+          >Krishi<span>Bharat</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-light" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="Knowledge Hub.html"
+                >Knowledge Hub</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="emarket.html">Marketplace</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="marketlinks.html"
+                >Market Links</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="smartfarming.html"
+                >Smart Farming</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="govermentschemes.html"
+                >Schemes</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <h1>KrushiBharat</h1>
+          <span class="tagline">Farmer's Marketplace</span>
+        </div>
+        <div class="nav-items">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search products..."
+            />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="cart-icon" id="cartIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="filters">
+        <div class="category-filters">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="seeds">Seeds</button>
+          <button class="filter-btn" data-category="fertilizers">
+            Fertilizers
+          </button>
+          <button class="filter-btn" data-category="tools">Tools</button>
+        </div>
+        <div class="sort-options">
+          <select id="sortSelect">
+            <option value="default">Sort by</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="products-grid" id="productsGrid">
+        <!-- Products will be dynamically inserted here -->
+      </section>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+      <div class="cart-content">
+        <div class="cart-header">
+          <h2>Shopping Cart</h2>
+          <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+          <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">₹0.00</span>
+          </div>
+          <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Products data
+      const products = [
+        {
+          id: "1",
+          name: "Organic Wheat Seeds",
+          description: "High-yield wheat seeds perfect for organic farming",
+          price: 199.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400",
+        },
+        {
+          id: "2",
+          name: "NPK Fertilizer",
+          description: "Balanced NPK fertilizer for all crops",
+          price: 549.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a4?w=400",
+        },
+        {
+          id: "3",
+          name: "Garden Hoe",
+          description: "Durable steel garden hoe for efficient farming",
+          price: 299.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1598452963314-b09f397a5c48?w=400",
+        },
+        {
+          id: "4",
+          name: "Tomato Seeds",
+          description: "High-quality hybrid tomato seeds",
+          price: 149.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400",
+        },
+        {
+          id: "5",
+          name: "Organic Compost",
+          description: "Rich organic compost for better yield",
+          price: 399.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1581859814481-bfd944e3122f?w=400",
+        },
+        {
+          id: "6",
+          name: "Pruning Shears",
+          description: "Sharp and precise pruning shears",
+          price: 249.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1593025085-4b22074f6e22?w=400",
+        },
+        {
+          id: "7",
+          name: "Tractor Plow",
+          description: "Heavy-duty tractor plow for field preparation",
+          price: 15999.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1589923188900-85dae523342b?w=400",
+        },
+        {
+          id: "8",
+          name: "Irrigation Sprinklers",
+          description: "Efficient water distribution system for crops",
+          price: 799.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1591962478290-19158c0f59ce?w=400",
+        },
+        {
+          id: "9",
+          name: "Cotton Seeds",
+          description: "Premium quality cotton seeds for maximum yield",
+          price: 299.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=400",
+        },
+        {
+          id: "10",
+          name: "Pesticide Sprayer",
+          description: "Battery-operated backpack sprayer for pest control",
+          price: 1299.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1592496001020-d31bd830651f?w=400",
+        },
+        {
+          id: "11",
+          name: "Urea Fertilizer",
+          description: "High-nitrogen fertilizer for rapid plant growth",
+          price: 449.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1601933516595-890998da8837?w=400",
+        },
+        {
+          id: "12",
+          name: "Rice Seeds",
+          description: "Disease-resistant rice variety for better harvest",
+          price: 179.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1568201402596-ececec2006a1?w=400",
+        },
+        {
+          id: "13",
+          name: "Harvesting Sickle",
+          description: "Sharp curved blade for manual harvesting",
+          price: 199.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1587305138714-9e31cca56b5c?w=400",
+        },
+        {
+          id: "14",
+          name: "Potassium Fertilizer",
+          description: "Essential for fruit and root development",
+          price: 599.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1594761045669-b100dd336b38?w=400",
+        },
+        {
+          id: "15",
+          name: "Maize Seeds",
+          description: "Drought-resistant corn variety for all seasons",
+          price: 259.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1592978132926-1f2879624c2d?w=400",
+        },
+        {
+          id: "16",
+          name: "Wheelbarrow",
+          description: "Heavy-duty wheelbarrow for farm transport",
+          price: 899.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1598452963314-b09f397a5c48?w=400",
+        },
+        {
+          id: "17",
+          name: "Soil pH Meter",
+          description: "Digital meter for soil testing",
+          price: 499.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1591962478290-19158c0f59ce?w=400",
+        },
+        {
+          id: "18",
+          name: "Organic Pesticide",
+          description: "Natural pest control solution",
+          price: 349.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1587305138714-9e31cca56b5c?w=400",
+        },
+        {
+          id: "19",
+          name: "Sugarcane Seeds",
+          description: "High-sugar content variety for better returns",
+          price: 289.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?w=400",
+        },
+        {
+          id: "20",
+          name: "Groundnut Seeds",
+          description: "Disease-resistant groundnut variety",
+          price: 219.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=400",
+        },
+        {
+          id: "21",
+          name: "Drip Irrigation Kit",
+          description: "Complete water-saving irrigation system",
+          price: 2499.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1591962478290-19158c0f59ce?w=400",
+        },
+        {
+          id: "22",
+          name: "Micronutrient Mix",
+          description: "Essential micronutrients for plant health",
+          price: 399.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a4?w=400",
+        },
+        {
+          id: "23",
+          name: "Farm Gloves Set",
+          description: "Durable protective gloves for farming",
+          price: 149.99,
+          category: "tools",
+          image:
+            "https://images.unsplash.com/photo-1578520046030-f84b113ae5cd?w=400",
+        },
+        {
+          id: "24",
+          name: "Vermicompost",
+          description: "Natural organic fertilizer for better soil health",
+          price: 299.99,
+          category: "fertilizers",
+          image:
+            "https://images.unsplash.com/photo-1581859814481-bfd944e3122f?w=400",
+        },
+        {
+          id: "25",
+          name: "Sunflower Seeds",
+          description: "High-oil content sunflower variety",
+          price: 179.99,
+          category: "seeds",
+          image:
+            "https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?w=400",
+        },
+      ];
+
+      // Cart state
+      let cart = [];
+
+      // Initialize cart from localStorage
+      function initializeCart() {
+        const savedCart = localStorage.getItem("cart");
+        if (savedCart) {
+          cart = JSON.parse(savedCart);
+          updateCartUI();
+        }
+      }
+
+      // Save cart to localStorage
+      function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+
+      // Add item to cart
+      function addToCart(productId) {
+        const existingItem = cart.find((item) => item.id === productId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            id: productId,
+            quantity: 1,
+          });
+        }
+
+        saveCart();
+        updateCartUI();
+      }
+
+      // Remove item from cart
+      function removeFromCart(productId) {
+        cart = cart.filter((item) => item.id !== productId);
+        saveCart();
+        updateCartUI();
+      }
+
+      // Update cart UI
+      function updateCartUI() {
+        const cartCount = document.getElementById("cartCount");
+        const cartItems = document.getElementById("cartItems");
+        const cartTotal = document.getElementById("cartTotal");
+
+        // Update cart count
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+
+        // Update cart items
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item) => {
+          const product = products.find((p) => p.id === item.id);
+          if (product) {
+            const itemTotal = product.price * item.quantity;
+            total += itemTotal;
+
+            const cartItem = document.createElement("div");
+            cartItem.className = "cart-item";
+            cartItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <div class="cart-item-info">
+                <h4 class="cart-item-title">${product.name}</h4>
+                <p class="cart-item-price">₹${product.price.toFixed(2)} × ${
+              item.quantity
+            }</p>
+                <p>Total: ₹${itemTotal.toFixed(2)}</p>
+            </div>
+            <button class="remove-item" data-id="${product.id}">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+
+            cartItems.appendChild(cartItem);
+          }
+        });
+
+        // Update total
+        cartTotal.textContent = `₹${total.toFixed(2)}`;
+      }
+
+      // Render products
+      function renderProducts(productsToRender) {
+        const productsGrid = document.getElementById("productsGrid");
+        productsGrid.innerHTML = "";
+        productsToRender.forEach((product) => {
+          const productCard = document.createElement("div");
+          productCard.className = "product-card";
+          productCard.innerHTML = `
+        <img src="${product.image}" alt="${
+            product.name
+          }" class="product-image" loading="lazy">
+        <div class="product-info">
+            <h3 class="product-title">${product.name}</h3>
+            <p>${product.description}</p>
+            <p class="product-price">₹${product.price.toFixed(2)}</p>
+            <button class="add-to-cart" data-id="${product.id}">
+                Add to Cart
+            </button>
+        </div>
+    `;
+          productsGrid.appendChild(productCard);
+        });
+      }
+
+      // Filter products
+      function filterProducts(category) {
+        let filteredProducts = products;
+        if (category !== "all") {
+          filteredProducts = products.filter(
+            (product) => product.category === category
+          );
+        }
+        return filteredProducts;
+      }
+
+      // Sort products
+      function sortProducts(products, sortBy) {
+        const sortedProducts = [...products];
+        switch (sortBy) {
+          case "price-low":
+            return sortedProducts.sort((a, b) => a.price - b.price);
+          case "price-high":
+            return sortedProducts.sort((a, b) => b.price - a.price);
+          case "name":
+            return sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+          default:
+            return sortedProducts;
+        }
+      }
+
+      // Search products
+      function searchProducts(query) {
+        return products.filter(
+          (product) =>
+            product.name.toLowerCase().includes(query.toLowerCase()) ||
+            product.description.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+
+      // Event Listeners
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize cart
+        initializeCart();
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            const category = btn.dataset.category;
+            const filtered = filterProducts(category);
+            const sorted = sortProducts(
+              filtered,
+              document.getElementById("sortSelect").value
+            );
+            renderProducts(sorted);
+          });
+        });
+
+        // Sort select
+        const sortSelect = document.getElementById("sortSelect");
+        sortSelect.addEventListener("change", () => {
+          const activeCategory =
+            document.querySelector(".filter-btn.active").dataset.category;
+          const filtered = filterProducts(activeCategory);
+          const sorted = sortProducts(filtered, sortSelect.value);
+          renderProducts(sorted);
+        });
+
+        // Search input
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("input", (e) => {
+          const query = e.target.value;
+          const searchResults = searchProducts(query);
+          renderProducts(searchResults);
+        });
+
+        // Add to cart buttons
+        document
+          .getElementById("productsGrid")
+          .addEventListener("click", (e) => {
+            if (e.target.classList.contains("add-to-cart")) {
+              const productId = e.target.dataset.id;
+              addToCart(productId);
+            }
+          });
+
+        // Remove from cart buttons
+        document.getElementById("cartItems").addEventListener("click", (e) => {
+          if (e.target.closest(".remove-item")) {
+            const productId = e.target.closest(".remove-item").dataset.id;
+            removeFromCart(productId);
+          }
+        });
+
+        // Cart modal
+        const cartModal = document.getElementById("cartModal");
+        document.getElementById("cartIcon").addEventListener("click", () => {
+          cartModal.classList.add("active");
+        });
+
+        document.getElementById("closeCart").addEventListener("click", () => {
+          cartModal.classList.remove("active");
+        });
+
+        // Initial render
+        renderProducts(products);
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

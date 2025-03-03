@@ -4,25 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KrushiBharat - Farmer's Marketplace</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-
     <style>
+      /* Base Styles */
       :root {
-        --primary-color: #2ecc71;
-        --secondary-color: #27ae60;
+        --primary-color: #22c55e;
+        --primary-dark: #16a34a;
+        --primary-light: #86efac;
         --text-color: #333;
-        --light-gray: #f5f5f5;
-        --border-color: #ddd;
+        --light-gray: #f3f4f6;
+        --border-color: #e5e7eb;
         --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
@@ -33,121 +23,192 @@
       }
 
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--light-gray);
       }
 
-      /* Navbar Styles */
-      .navbar {
-        background-color: white;
-        padding: 1rem 2rem;
-        box-shadow: var(--shadow);
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* Main Navigation */
+      .main-nav {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 1rem 0;
+      }
+
+      .main-nav .container {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 100;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
       }
 
       .logo h1 {
-        color: var(--primary-color);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        font-weight: bold;
       }
 
-      .logo .tagline {
-        font-size: 0.9rem;
-        color: var(--text-color);
-      }
-
-      .nav-items {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-
-      .search-bar {
-        display: flex;
-        align-items: center;
-      }
-
-      .search-bar input {
-        padding: 0.5rem 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        width: 300px;
-      }
-
-      .search-bar button {
-        padding: 0.5rem 1rem;
-        background: var(--primary-color);
-        border: none;
-        border-radius: 0 4px 4px 0;
-        color: white;
-        cursor: pointer;
-      }
-
-      .cart-icon {
-        position: relative;
-        cursor: pointer;
-      }
-
-      .cart-count {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background: var(--primary-color);
-        color: white;
-        border-radius: 50%;
-        padding: 0.2rem 0.5rem;
+      .tagline {
         font-size: 0.8rem;
+        margin-left: 0.5rem;
+      }
+
+      .nav-links ul {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary-light);
+      }
+
+      /* Secondary Navigation */
+      .secondary-nav {
+        background-color: white;
+        box-shadow: var(--shadow);
+        padding: 0.75rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .secondary-nav .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-small {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .logo-small h2 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--primary-color);
+      }
+
+      .tagline-small {
+        font-size: 0.75rem;
+        margin-left: 0.5rem;
+        color: #666;
+      }
+
+      .search-container {
+        width: 100%;
+      }
+
+      .search-box {
+        position: relative;
+        width: 100%;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 0.5rem 0.5rem 0.5rem 2rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+      }
+
+      .search-box input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
       }
 
       /* Filters Section */
-      .filters {
-        padding: 1rem 2rem;
+      .filters-section {
+        margin: 1.5rem 0;
+      }
+
+      .filters-section .container {
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        box-shadow: var(--shadow);
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        background: white;
-        margin: 1rem 2rem;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
+      }
+
+      .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
       }
 
       .filter-btn {
         padding: 0.5rem 1rem;
-        margin-right: 0.5rem;
         border: none;
-        border-radius: 4px;
+        border-radius: 0.25rem;
+        background-color: #e5e7eb;
         cursor: pointer;
-        background: var(--light-gray);
+        font-size: 0.875rem;
       }
 
       .filter-btn.active {
-        background: var(--primary-color);
+        background-color: var(--primary-color);
         color: white;
       }
 
-      #sortSelect {
+      .sort-dropdown select {
         padding: 0.5rem;
         border: 1px solid var(--border-color);
-        border-radius: 4px;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
       }
 
       /* Products Grid */
+      .products-container {
+        margin-bottom: 3rem;
+      }
+
       .products-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 2rem;
-        padding: 2rem;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.5rem;
       }
 
       .product-card {
-        background: white;
-        border-radius: 8px;
+        background-color: white;
+        border-radius: 0.5rem;
         overflow: hidden;
         box-shadow: var(--shadow);
         transition: transform 0.3s ease;
@@ -163,247 +224,139 @@
         object-fit: cover;
       }
 
-      .product-info {
+      .product-details {
         padding: 1rem;
       }
 
       .product-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        font-weight: 600;
         margin-bottom: 0.5rem;
       }
 
+      .product-description {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0.75rem;
+      }
+
       .product-price {
+        font-size: 1.25rem;
+        font-weight: 700;
         color: var(--primary-color);
-        font-weight: bold;
-        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
       }
 
-      .add-to-cart {
-        width: 100%;
-        padding: 0.8rem;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-
-      .add-to-cart:hover {
-        background: var(--secondary-color);
-      }
-
-      /* Cart Modal */
-      .cart-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 400px;
-        background: white;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-      }
-
-      .cart-modal.active {
+      .buy-button {
         display: block;
-      }
-
-      .cart-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .cart-header {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .close-cart {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-
-      .cart-items {
-        flex-grow: 1;
-        overflow-y: auto;
-        padding: 1rem;
-      }
-
-      .cart-item {
-        display: flex;
-        gap: 1rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--border-color);
-      }
-
-      .cart-item img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 4px;
-      }
-
-      .cart-item-info {
-        flex-grow: 1;
-      }
-
-      .cart-item-title {
-        font-weight: bold;
-      }
-
-      .cart-item-price {
-        color: var(--primary-color);
-      }
-
-      .remove-item {
-        color: red;
-        background: none;
-        border: none;
-        cursor: pointer;
-      }
-
-      .cart-footer {
-        padding: 1rem;
-        border-top: 1px solid var(--border-color);
-      }
-
-      .cart-total {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-
-      .checkout-btn {
         width: 100%;
-        padding: 1rem;
-        background: var(--primary-color);
+        padding: 0.5rem 0;
+        background-color: var(--primary-color);
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 0.25rem;
+        font-weight: 500;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+      }
+
+      .buy-button:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .no-products {
+        text-align: center;
+        padding: 3rem 0;
+        color: #6b7280;
+        font-size: 1.125rem;
       }
 
       /* Responsive Design */
-      @media (max-width: 768px) {
-        .navbar {
-          flex-direction: column;
-          gap: 1rem;
+      @media (min-width: 640px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 768px) {
+        .main-nav .container,
+        .secondary-nav .container,
+        .filters-section .container {
+          flex-direction: row;
         }
 
-        .nav-items {
-          width: 100%;
-          flex-direction: column;
-          gap: 1rem;
+        .logo,
+        .logo-small {
+          margin-bottom: 0;
         }
 
-        .search-bar {
-          width: 100%;
+        .search-container {
+          width: auto;
+          max-width: 320px;
         }
 
-        .search-bar input {
-          width: 100%;
+        .filter-buttons {
+          margin-bottom: 0;
         }
 
-        .filters {
-          flex-direction: column;
-          gap: 1rem;
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
+      }
 
-        .cart-modal {
-          width: 100%;
+      @media (min-width: 1024px) {
+        .products-grid {
+          grid-template-columns: repeat(4, 1fr);
         }
       }
     </style>
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg sticky-top"
-      style="background-color: #8cd12b"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand text-light" href="index.html"
-          >Krishi<span>Bharat</span></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active text-light" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="about.html">About Us</a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link text-light" href="emarket.html">Marketplace</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="marketlinks.html"
-                >Market Links</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="smartfarming.html"
-                >Smart Farming</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="govermentschemes.html"
-                >Schemes</a
-              >
-            </li>
-            <span id="google_translate_element"></span>
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+      <div class="container">
+        <div class="logo">
+          <h1>KrushiBharat</h1>
+          <span class="tagline">Farmer's Marketplace</span>
+        </div>
+        <div class="nav-links">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">Market Links</a></li>
+            <li><a href="#">Smart Farming</a></li>
+            <li><a href="#">Schemes</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <header>
-      <nav class="navbar">
-        <div class="logo">
-          <h1>KrushiBharat</h1>
-          <span class="tagline">Farmer's Marketplace</span>
+    <!-- Secondary Navigation with Search -->
+    <div class="secondary-nav">
+      <div class="container">
+        <div class="logo-small">
+          <h2>KrushiBharat</h2>
+          <span class="tagline-small">Farmer's Marketplace</span>
         </div>
-        <div class="nav-items">
-          <div class="search-bar">
+        <div class="search-container">
+          <div class="search-box">
             <input
               type="text"
               id="searchInput"
               placeholder="Search products..."
             />
-            <button><i class="fas fa-search"></i></button>
-          </div>
-          <div class="cart-icon" id="cartIcon">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count" id="cartCount">0</span>
+            <span class="search-icon">🔍</span>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </div>
 
-    <main>
-      <section class="filters">
-        <div class="category-filters">
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <div class="container">
+        <div class="filter-buttons">
           <button class="filter-btn active" data-category="all">All</button>
           <button class="filter-btn" data-category="seeds">Seeds</button>
           <button class="filter-btn" data-category="fertilizers">
@@ -411,7 +364,7 @@
           </button>
           <button class="filter-btn" data-category="tools">Tools</button>
         </div>
-        <div class="sort-options">
+        <div class="sort-dropdown">
           <select id="sortSelect">
             <option value="default">Sort by</option>
             <option value="price-low">Price: Low to High</option>
@@ -419,29 +372,17 @@
             <option value="name">Name</option>
           </select>
         </div>
-      </section>
+      </div>
+    </div>
 
-      <section class="products-grid" id="productsGrid">
-        <!-- Products will be dynamically inserted here -->
-      </section>
-    </main>
-
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-      <div class="cart-content">
-        <div class="cart-header">
-          <h2>Shopping Cart</h2>
-          <button class="close-cart" id="closeCart">&times;</button>
+    <!-- Products Grid -->
+    <div class="products-container">
+      <div class="container">
+        <div class="products-grid" id="productsGrid">
+          <!-- Products will be dynamically inserted here -->
         </div>
-        <div class="cart-items" id="cartItems">
-          <!-- Cart items will be dynamically inserted here -->
-        </div>
-        <div class="cart-footer">
-          <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">₹0.00</span>
-          </div>
-          <button class="checkout-btn">Proceed to Checkout</button>
+        <div class="no-products" id="noProducts" style="display: none">
+          <p>No products found matching your criteria.</p>
         </div>
       </div>
     </div>
@@ -457,6 +398,7 @@
           category: "seeds",
           image:
             "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "2",
@@ -466,6 +408,7 @@
           category: "fertilizers",
           image:
             "https://thumbs.dreamstime.com/b/npk-letters-made-mineral-fertilizers-blurred-natural-background-n-nitrogen-p-phosphorus-k-potassium-kalium-71013052.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "3",
@@ -475,6 +418,7 @@
           category: "tools",
           image:
             "https://3.imimg.com/data3/PY/SU/MY-9995388/trenching-hooe-500x500.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "4",
@@ -484,6 +428,7 @@
           category: "seeds",
           image:
             "https://i0.wp.com/plantcraft.in/wp-content/uploads/2020/12/tomato-seeds-1.jpg?fit=448%2C299&ssl=1",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "5",
@@ -493,6 +438,7 @@
           category: "fertilizers",
           image:
             "https://media.istockphoto.com/id/479440915/photo/compost-with-composted-earth.jpg?s=612x612&w=0&k=20&c=P5u2ACtdpVOZETebKudOz7RFL3b6EqY-2uQOrQ2_bdA=",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "6",
@@ -502,6 +448,7 @@
           category: "tools",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ9AiY7FSVGntEGuLDkNx29dF-iO1Z9FSDRgVQyLx40DHqW0IgehL_DABsJPYmqG2EvEs&usqp=CAU",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "7",
@@ -511,6 +458,7 @@
           category: "tools",
           image:
             "https://media.istockphoto.com/id/1301286137/photo/a-plow-for-cultivating-the-soil-is-attached-to-a-dusty-tractor-equipment-in-industry-of.jpg?s=612x612&w=0&k=20&c=kfpXZJS8PQuIXm1d_ZjypKj68BllVvM4WCbn5BqkL54=",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "8",
@@ -520,6 +468,7 @@
           category: "tools",
           image:
             "https://images.pexels.com/photos/750830/pexels-photo-750830.jpeg?cs=srgb&dl=pexels-fox-58267-750830.jpg&fm=jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "9",
@@ -529,6 +478,7 @@
           category: "seeds",
           image:
             "https://thumbs.dreamstime.com/b/cotton-seed-seeds-white-backgroung-brazil-61953441.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "10",
@@ -538,6 +488,7 @@
           category: "tools",
           image:
             "https://5.imimg.com/data5/SELLER/Default/2023/2/NG/JT/WO/12566942/battery-spray-pump-500x500.jpeg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "11",
@@ -547,6 +498,7 @@
           category: "fertilizers",
           image:
             "https://5.imimg.com/data5/SELLER/Default/2023/9/340633787/JD/NZ/OS/195462752/urea-fertilizer-500x500.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "12",
@@ -555,6 +507,7 @@
           price: 179.99,
           category: "seeds",
           image: "https://panseeds.in/wp-content/uploads/2023/02/pan_851-2.png",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "13",
@@ -564,6 +517,7 @@
           category: "tools",
           image:
             "https://5.imimg.com/data5/SELLER/Default/2022/6/YL/WT/IO/3646185/harvesting-sickle-500x500.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "14",
@@ -572,6 +526,7 @@
           price: 599.99,
           category: "fertilizers",
           image: "https://www.indianpotash.org/images/mop.jpg?1737417600014",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "15",
@@ -580,6 +535,7 @@
           price: 259.99,
           category: "seeds",
           image: "https://inputs.kalgudi.com/data/p_images/1655720825033.jpeg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "16",
@@ -589,6 +545,7 @@
           category: "tools",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT34wzICUt_xnYbs63nGIl8dsydwbUQchsbXA&s",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "17",
@@ -598,6 +555,7 @@
           category: "tools",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP66Oa3Bg1aKI6rXAqa1YhRctBviCHtCGQtA&s",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "18",
@@ -607,6 +565,7 @@
           category: "fertilizers",
           image:
             "https://5.imimg.com/data5/CI/YC/SB/SELLER-40744093/152-500x500.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "19",
@@ -616,6 +575,7 @@
           category: "seeds",
           image:
             "https://images-cdn.ubuy.co.in/641c00a555352331d07b2b83-1099-sugarcane-world-39-s-tallest.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "20",
@@ -625,6 +585,7 @@
           category: "seeds",
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa5qIoR_ooqit-pnBDpDOW1lDwJEjydvcEHQ&s",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "21",
@@ -634,6 +595,7 @@
           category: "tools",
           image:
             "https://farmsquare.ng/wp-content/uploads/2020/09/drip-irrigation-system-kit-500x500-1.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "22",
@@ -643,6 +605,7 @@
           category: "fertilizers",
           image:
             "https://krushidukan.bharatagri.com/cdn/shop/files/MicronutrientMIx_2_559d149d-2f21-43a8-b07e-9cdae1b9b727.webp?v=1727102014",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "23",
@@ -652,6 +615,7 @@
           category: "tools",
           image:
             "https://img.freepik.com/free-vector/variety-gloves-set_74855-15564.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "24",
@@ -661,6 +625,7 @@
           category: "fertilizers",
           image:
             "https://thumbs.dreamstime.com/b/vermicomposting-nature-agriculture-earthworm-organic-vermicompost-vermiculture-sustainable-gardening-vermicomposting-nature-320629677.jpg",
+          buyLink: "#", // Replace with actual external link
         },
         {
           id: "25",
@@ -670,238 +635,138 @@
           category: "seeds",
           image:
             "https://media.istockphoto.com/id/153572197/photo/closeup-of-sunflower-seeds.jpg?s=612x612&w=0&k=20&c=GP4ILfhx-Xlee6oGYhJK4i_lzrjuWdEXnMzItr96IdA=",
+          buyLink: "#", // Replace with actual external link
         },
       ];
 
-      // Cart state
-      let cart = [];
+      // DOM Elements
+      const productsGrid = document.getElementById("productsGrid");
+      const noProductsMessage = document.getElementById("noProducts");
+      const searchInput = document.getElementById("searchInput");
+      const sortSelect = document.getElementById("sortSelect");
+      const filterButtons = document.querySelectorAll(".filter-btn");
 
-      // Initialize cart from localStorage
-      function initializeCart() {
-        const savedCart = localStorage.getItem("cart");
-        if (savedCart) {
-          cart = JSON.parse(savedCart);
-          updateCartUI();
-        }
-      }
+      // State
+      let activeCategory = "all";
+      let currentSortOption = "default";
+      let currentSearchQuery = "";
 
-      // Save cart to localStorage
-      function saveCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
-
-      // Add item to cart
-      function addToCart(productId) {
-        const existingItem = cart.find((item) => item.id === productId);
-
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          cart.push({
-            id: productId,
-            quantity: 1,
-          });
-        }
-
-        saveCart();
-        updateCartUI();
-      }
-
-      // Remove item from cart
-      function removeFromCart(productId) {
-        cart = cart.filter((item) => item.id !== productId);
-        saveCart();
-        updateCartUI();
-      }
-
-      // Update cart UI
-      function updateCartUI() {
-        const cartCount = document.getElementById("cartCount");
-        const cartItems = document.getElementById("cartItems");
-        const cartTotal = document.getElementById("cartTotal");
-
-        // Update cart count
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
-
-        // Update cart items
-        cartItems.innerHTML = "";
-        let total = 0;
-
-        cart.forEach((item) => {
-          const product = products.find((p) => p.id === item.id);
-          if (product) {
-            const itemTotal = product.price * item.quantity;
-            total += itemTotal;
-
-            const cartItem = document.createElement("div");
-            cartItem.className = "cart-item";
-            cartItem.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <div class="cart-item-info">
-                <h4 class="cart-item-title">${product.name}</h4>
-                <p class="cart-item-price">₹${product.price.toFixed(2)} × ${
-              item.quantity
-            }</p>
-                <p>Total: ₹${itemTotal.toFixed(2)}</p>
-            </div>
-            <button class="remove-item" data-id="${product.id}">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-
-            cartItems.appendChild(cartItem);
-          }
-        });
-
-        // Update total
-        cartTotal.textContent = `₹${total.toFixed(2)}`;
-      }
-
-      // Render products
-      function renderProducts(productsToRender) {
-        const productsGrid = document.getElementById("productsGrid");
-        productsGrid.innerHTML = "";
-        productsToRender.forEach((product) => {
-          const productCard = document.createElement("div");
-          productCard.className = "product-card";
-          productCard.innerHTML = `
-        <img src="${product.image}" alt="${
-            product.name
-          }" class="product-image" loading="lazy">
-        <div class="product-info">
-            <h3 class="product-title">${product.name}</h3>
-            <p>${product.description}</p>
-            <p class="product-price">₹${product.price.toFixed(2)}</p>
-            <button class="add-to-cart" data-id="${product.id}">
-                Add to Cart
-            </button>
-        </div>
-    `;
-          productsGrid.appendChild(productCard);
-        });
-      }
-
-      // Filter products
-      function filterProducts(category) {
-        let filteredProducts = products;
-        if (category !== "all") {
-          filteredProducts = products.filter(
-            (product) => product.category === category
-          );
-        }
-        return filteredProducts;
-      }
-
-      // Sort products
-      function sortProducts(products, sortBy) {
-        const sortedProducts = [...products];
-        switch (sortBy) {
-          case "price-low":
-            return sortedProducts.sort((a, b) => a.price - b.price);
-          case "price-high":
-            return sortedProducts.sort((a, b) => b.price - a.price);
-          case "name":
-            return sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-          default:
-            return sortedProducts;
-        }
-      }
-
-      // Search products
-      function searchProducts(query) {
-        return products.filter(
-          (product) =>
-            product.name.toLowerCase().includes(query.toLowerCase()) ||
-            product.description.toLowerCase().includes(query.toLowerCase())
-        );
-      }
-
-      // Event Listeners
+      // Initialize
       document.addEventListener("DOMContentLoaded", () => {
-        // Initialize cart
-        initializeCart();
+        renderProducts(products);
+        setupEventListeners();
+      });
 
+      // Setup Event Listeners
+      function setupEventListeners() {
         // Filter buttons
-        const filterBtns = document.querySelectorAll(".filter-btn");
-        filterBtns.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            filterBtns.forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            const category = btn.dataset.category;
-            const filtered = filterProducts(category);
-            const sorted = sortProducts(
-              filtered,
-              document.getElementById("sortSelect").value
-            );
-            renderProducts(sorted);
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            // Add active class to clicked button
+            button.classList.add("active");
+            // Update active category
+            activeCategory = button.dataset.category;
+            // Update products
+            updateProducts();
           });
         });
 
         // Sort select
-        const sortSelect = document.getElementById("sortSelect");
         sortSelect.addEventListener("change", () => {
-          const activeCategory =
-            document.querySelector(".filter-btn.active").dataset.category;
-          const filtered = filterProducts(activeCategory);
-          const sorted = sortProducts(filtered, sortSelect.value);
-          renderProducts(sorted);
+          currentSortOption = sortSelect.value;
+          updateProducts();
         });
 
         // Search input
-        const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", (e) => {
-          const query = e.target.value;
-          const searchResults = searchProducts(query);
-          renderProducts(searchResults);
+        searchInput.addEventListener("input", () => {
+          currentSearchQuery = searchInput.value;
+          updateProducts();
         });
+      }
 
-        // Add to cart buttons
-        document
-          .getElementById("productsGrid")
-          .addEventListener("click", (e) => {
-            if (e.target.classList.contains("add-to-cart")) {
-              const productId = e.target.dataset.id;
-              addToCart(productId);
-            }
+      // Update products based on filters, sort, and search
+      function updateProducts() {
+        let filteredProducts = products;
+
+        // Apply category filter
+        if (activeCategory !== "all") {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.category === activeCategory
+          );
+        }
+
+        // Apply search filter
+        if (currentSearchQuery) {
+          filteredProducts = filteredProducts.filter(
+            (product) =>
+              product.name
+                .toLowerCase()
+                .includes(currentSearchQuery.toLowerCase()) ||
+              product.description
+                .toLowerCase()
+                .includes(currentSearchQuery.toLowerCase())
+          );
+        }
+
+        // Apply sorting
+        switch (currentSortOption) {
+          case "price-low":
+            filteredProducts = [...filteredProducts].sort(
+              (a, b) => a.price - b.price
+            );
+            break;
+          case "price-high":
+            filteredProducts = [...filteredProducts].sort(
+              (a, b) => b.price - a.price
+            );
+            break;
+          case "name":
+            filteredProducts = [...filteredProducts].sort((a, b) =>
+              a.name.localeCompare(b.name)
+            );
+            break;
+          default:
+            break;
+        }
+
+        renderProducts(filteredProducts);
+      }
+
+      // Render products to the grid
+      function renderProducts(productsToRender) {
+        productsGrid.innerHTML = "";
+
+        if (productsToRender.length === 0) {
+          noProductsMessage.style.display = "block";
+        } else {
+          noProductsMessage.style.display = "none";
+
+          productsToRender.forEach((product) => {
+            const productCard = document.createElement("div");
+            productCard.className = "product-card";
+            productCard.innerHTML = `
+      <img 
+        src="${product.image}" 
+        alt="${product.name}" 
+        class="product-image"
+        loading="lazy"
+      />
+      <div class="product-details">
+        <h3 class="product-title">${product.name}</h3>
+        <p class="product-description">${product.description}</p>
+        <p class="product-price">₹${product.price.toFixed(2)}</p>
+        <a href="${
+          product.buyLink
+        }" class="buy-button" target="_blank" rel="noopener noreferrer">Buy this Product</a>
+      </div>
+    `;
+
+            productsGrid.appendChild(productCard);
           });
-
-        // Remove from cart buttons
-        document.getElementById("cartItems").addEventListener("click", (e) => {
-          if (e.target.closest(".remove-item")) {
-            const productId = e.target.closest(".remove-item").dataset.id;
-            removeFromCart(productId);
-          }
-        });
-
-        // Cart modal
-        const cartModal = document.getElementById("cartModal");
-        document.getElementById("cartIcon").addEventListener("click", () => {
-          cartModal.classList.add("active");
-        });
-
-        document.getElementById("closeCart").addEventListener("click", () => {
-          cartModal.classList.remove("active");
-        });
-
-        // Initial render
-        renderProducts(products);
-      });
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          { pageLanguage: "en" },
-          "google_translate_element"
-        );
+        }
       }
     </script>
-    <script
-      type="text/javascript"
-      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>

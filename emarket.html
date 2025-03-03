@@ -398,7 +398,8 @@
           category: "seeds",
           image:
             "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400",
-          buyLink: "#", // Replace with actual external link
+          buyLink:
+            "https://www.flipkart.com/wheat-1kg-best-quality-seeds-pure-organic-seed/p/itm611068a0c542d?pid=PAEGNVNFVKHD4SN5&lid=LSTPAEGNVNFVKHD4SN5MEFC3S&marketplace=FLIPKART&cmpid=content_plant-seed_8965229628_gmc&gQT=1", // Replace with actual external link
         },
         {
           id: "2",
@@ -408,17 +409,18 @@
           category: "fertilizers",
           image:
             "https://thumbs.dreamstime.com/b/npk-letters-made-mineral-fertilizers-blurred-natural-background-n-nitrogen-p-phosphorus-k-potassium-kalium-71013052.jpg",
-          buyLink: "#", // Replace with actual external link
+          buyLink: "https://www.iffco.in/en/npk-10-26-26", // Replace with actual external link
         },
         {
           id: "3",
           name: "Garden Hoe",
           description: "Durable steel garden hoe for efficient farming",
-          price: 299.99,
+          price: 999.99,
           category: "tools",
           image:
             "https://3.imimg.com/data3/PY/SU/MY-9995388/trenching-hooe-500x500.jpg",
-          buyLink: "#", // Replace with actual external link
+          buyLink:
+            "https://www.flipkart.com/wolf-garten-ln2k-double-steel-hoe-garden-tool-kit/p/itmbadf2323c3029?pid=GTSFGNPZQDCGCHGB&lid=LSTGTSFGNPZQDCGCHGB3H7ACD&marketplace=FLIPKART&cmpid=content_garden-tool-set_8965229628_gmc&gQT=1", // Replace with actual external link
         },
         {
           id: "4",
@@ -428,7 +430,8 @@
           category: "seeds",
           image:
             "https://i0.wp.com/plantcraft.in/wp-content/uploads/2020/12/tomato-seeds-1.jpg?fit=448%2C299&ssl=1",
-          buyLink: "#", // Replace with actual external link
+          buyLink:
+            "https://www.flipkart.com/ugaoo-tomato-vegetable-seeds-red-pack-25-gram-seed/p/itmb723261c63a8c?pid=PAEH2KS9DDPEMUYD&lid=LSTPAEH2KS9DDPEMUYDWGWDAE&marketplace=FLIPKART&q=Tomato+Seeds&store=h1m%2Fum7%2Fsd1%2Fkkl&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=en_wRaCgzW8dcsZ6Axgzf1mdC8Nati1si7h9AZxwD9z2pDctpToUIPzdkY2vCYrPL9VIHiIloedT7P-FHSbM1VdhA%3D%3D&ppt=pp&ppn=pp&ssid=i7qc0qcbsw0000001740982448946&qH=87334f931e5afa2d", // Replace with actual external link
         },
         {
           id: "5",
@@ -438,7 +441,8 @@
           category: "fertilizers",
           image:
             "https://media.istockphoto.com/id/479440915/photo/compost-with-composted-earth.jpg?s=612x612&w=0&k=20&c=P5u2ACtdpVOZETebKudOz7RFL3b6EqY-2uQOrQ2_bdA=",
-          buyLink: "#", // Replace with actual external link
+          buyLink:
+            "https://www.flipkart.com/ugaoo-organic-vermicompost-plants-fertilizer/p/itmf79952af17038?pid=SMNGT82RDGZ6GXQ9&lid=LSTSMNGT82RDGZ6GXQ9BFJELL&marketplace=FLIPKART&q=Organic+Compost&store=h1m%2Fum7%2Fsd1%2Fiqo&srno=s_1_1&otracker=search&otracker1=search&fm=Search&iid=en_cwPQwXspz0vgpdVRU9IjWIZpy4mbm4XsPmPu56uXqy_S6Y86cYxORHp0gdPvGUAJJdX_yEZRptJSSnpDMa0mxg%3D%3D&ppt=sp&ppn=sp&ssid=cbqyvtfiq80000001740982753370&qH=7e21a4306e2d2251", // Replace with actual external link
         },
         {
           id: "6",
@@ -747,21 +751,21 @@
             const productCard = document.createElement("div");
             productCard.className = "product-card";
             productCard.innerHTML = `
-      <img 
-        src="${product.image}" 
-        alt="${product.name}" 
-        class="product-image"
-        loading="lazy"
-      />
-      <div class="product-details">
-        <h3 class="product-title">${product.name}</h3>
-        <p class="product-description">${product.description}</p>
-        <p class="product-price">₹${product.price.toFixed(2)}</p>
-        <a href="${
-          product.buyLink
-        }" class="buy-button" target="_blank" rel="noopener noreferrer">Buy this Product</a>
-      </div>
-    `;
+        <img 
+          src="${product.image}" 
+          alt="${product.name}" 
+          class="product-image"
+          loading="lazy"
+        />
+        <div class="product-details">
+          <h3 class="product-title">${product.name}</h3>
+          <p class="product-description">${product.description}</p>
+          <p class="product-price">₹${product.price.toFixed(2)}</p>
+          <a href="${
+            product.buyLink
+          }" class="buy-button" target="_blank" rel="noopener noreferrer">Buy this Product</a>
+        </div>
+      `;
 
             productsGrid.appendChild(productCard);
           });

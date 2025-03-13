@@ -381,7 +381,8 @@
           description:
             "Direct income support of ₹6000 per year to eligible farmer families, payable in three equal installments of ₹2000 each.",
           type: "financial",
-          states: ["all"], // National scheme
+          states: ["all"],
+          link: "https://pmkisan.gov.in/", // National scheme
         },
         {
           id: 2,
@@ -390,6 +391,7 @@
             "Ensuring access to protective irrigation to all agricultural farms to improve crop production.",
           type: "irrigation",
           states: ["maharashtra", "gujarat", "madhya-pradesh"],
+          link: "https://pmksy.gov.in/", // National scheme
         },
         {
           id: 3,
@@ -398,6 +400,7 @@
             "Provides information to farmers on nutrient status of their soil along with recommendations on appropriate dosage of nutrients.",
           type: "sustainable",
           states: ["punjab", "uttar-pradesh", "madhya-pradesh"],
+          link: "https://soilhealth.dac.gov.in/",
         },
         {
           id: 4,
@@ -406,6 +409,7 @@
             "Government provides fertilizers to farmers at subsidized prices through fertilizer manufacturers/importers.",
           type: "agriculture",
           states: ["all"], // National scheme
+          link: "https://fert.nic.in/",
         },
         {
           id: 5,
@@ -414,6 +418,7 @@
             "Promotes sustainable agriculture through climate change adaptation measures and sustainable use of natural resources.",
           type: "sustainable",
           states: ["karnataka", "maharashtra", "gujarat"],
+          link: "https://nmsa.dac.gov.in/",
         },
         {
           id: 6,
@@ -422,6 +427,7 @@
             "Provides financial assistance to farmers for purchasing agricultural equipment and machinery.",
           type: "equipment",
           states: ["karnataka"],
+          link: "https://raitamitra.karnataka.gov.in/",
         },
         {
           id: 7,
@@ -430,6 +436,7 @@
             "Supports sustainable and climate-resilient agriculture for small farmers in Maharashtra.",
           type: "sustainable",
           states: ["maharashtra"],
+          link: "https://macp.gov.in/",
         },
         {
           id: 8,
@@ -438,6 +445,7 @@
             "Comprehensive policy framework for agricultural development and farmer welfare in Punjab.",
           type: "agriculture",
           states: ["punjab"],
+          link: "https://agripb.gov.in/",
         },
       ];
 
@@ -468,12 +476,7 @@
         <h3 class="scheme-title">${scheme.title}</h3>
         <p class="scheme-description">${scheme.description}</p>
     </div>
-    <button class="learn-more">
-        Learn More
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 5l7 7-7 7"/>
-        </svg>
-    </button>
+    <a href="${scheme.link}" class="learn-more-btn">Learn More</a>
 `;
         return card;
       }
